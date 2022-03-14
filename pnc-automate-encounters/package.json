@@ -1,0 +1,15 @@
+{
+  "name": "user-scripts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && esbuild index.ts --target=es6 --outfile=dist.min.js --minify"
+  },
+  "author": "",
+  "devDependencies": {
+    "esbuild": "^0.14.25",
+    "typescript": "^4.6.2"
+  }
+}
