@@ -156,10 +156,10 @@ function fillInCaseFormulation(encounterType: EncounterType) {
     throw new Error("Could not find Case formulation text box");
 
   caseFormulationEditableDiv.scrollIntoView({ behavior: "smooth" });
-  caseFormulationEditableDiv.innerText = `Presenting: 
-Precipitating: 
-Predisposing: 
-Perpetuating: 
+  caseFormulationEditableDiv.innerText = `Presenting:
+Precipitating:
+Predisposing:
+Perpetuating:
 Protective:`;
 }
 
@@ -306,6 +306,40 @@ async function setMentalStatusExamInputsToUnremarkable(
         x.innerText.includes("well-nourished")
     )
     .forEach((x) => x.click());
+
+  await sleep();
+
+  // Clear specific radio buttons
+
+  const clearRadioAnchors: HTMLAnchorElement[] = Array.from(
+    modal.querySelectorAll("a[href*='javascript:clearradio(']")
+  );
+  const clearRadioAnchorsToClick = clearRadioAnchors.filter(
+    (x) =>
+      x.innerText.includes("clear") &&
+      (x.href.includes("623") ||
+        x.href.includes("629") ||
+        x.href.includes("635") ||
+        x.href.includes("820") ||
+        x.href.includes("851") ||
+        x.href.includes("879") ||
+        x.href.includes("893") ||
+        x.href.includes("908"))
+  );
+  for (const anchor of clearRadioAnchorsToClick) {
+    if (
+      anchor.href.includes("623") ||
+      anchor.href.includes("629") ||
+      anchor.href.includes("635")
+    ) {
+      anchor.style.scrollMarginTop = "20px";
+    }
+
+    anchor.scrollIntoView({ behavior: "smooth" });
+    await sleep(500);
+    anchor.click();
+    await sleep(500);
+  }
 
   await sleep();
 
